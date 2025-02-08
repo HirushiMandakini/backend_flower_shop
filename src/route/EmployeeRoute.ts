@@ -1,6 +1,6 @@
 import express from 'express';
-import Employee from '../model/employeeModel'; // ✅ Import Employee class
-import { EmployeeAdd,EmployeeUpdate  } from '../database/employee'
+import Employee from '../model/employeeModel';
+import { EmployeeAdd,EmployeeUpdate,EmployeeDelete  } from '../database/employee'
 
 
 const router = express.Router();
@@ -27,21 +27,15 @@ router.put('/update/:id',async (req, res) => {
             }
             })
 
-// router.put('/update/:id', async (req, res) => {
-//     try {
-//         const { id } = req.params; // Extract ID from URL params
-//         const updatedData = req.body; // Extract updated data from request body
+router.delete('/delete/:id', async (req, res) => {
+    const { id } = req.params; // Extracting ID correctly
+    try {
+        const employeeDelete = await EmployeeDelete(id);
+        res.status(200).json({ message: "Employee deleted successfully", employee: employeeDelete });
+    } catch (error: any) {
+        console.error("Error in deleting employee:", error);
+        res.status(400).json({ error: "Error in deleting employee", details: error.message });
+    }
+});
 
-//         if (!id) {
-//             return res.status(400).json({ error: "Employee ID is required" });
-//         }
-
-//         const updatedEmployee = await EmployeeUpdate(id, updatedData);
-
-//         res.status(200).json({ message: "Employee updated successfully", employee: updatedEmployee });
-//     } catch (error) {
-//         console.error("❌ Error in updating employee:", error);
-//         res.status(500).json({ error: "Failed to update employee" });
-//     }
-// });
 export default router;
