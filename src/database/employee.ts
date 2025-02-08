@@ -24,6 +24,26 @@ export async function EmployeeAdd(employee:{firstName:string, lastName:string, e
     }
 }
 
+export async function EmployeeUpdate(id: string,updateData: {
+    firstName?: string,
+    LastName?: string,
+    email?: string,
+    phone?: string,
+    position?: string,
+    salary?: Decimal
+}){
+    try{
+        const updatedEmployee = await prisma.employee.update({
+            where: {id:id},
+            data:updateData
+        });
+        console.log(`Employee updated: ${updatedEmployee.firstName} ${updatedEmployee.lastName}`);
+        return updatedEmployee;
+    }catch(error){
+        console.error("Error updating employee: ", error);
+        throw error;
+    }
+}
 // export async function EmployeeUpdate(id: string,updateData: {
 //     firstName?: string,
 //     lastName?: string,
