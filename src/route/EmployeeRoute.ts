@@ -1,10 +1,11 @@
 import express from 'express';
-import employee from '../model/employee';
-import { EmployeeAdd } from '../database/employee'
+import Employee from '../model/employeeModel'; // ✅ Import Employee class
+import { EmployeeAdd  } from '../database/employee'
+
 
 const router = express.Router();
 router.post('/add', async (req, res) => {
-    const Employee:employee=req.body;
+    const Employee:Employee=req.body;
     try{
         const employeeAdd=await EmployeeAdd(Employee);
         res.send("Employee added successfully");
@@ -13,5 +14,6 @@ router.post('/add', async (req, res) => {
         res.send("Error in adding employee");
     }
 })
+
 
 export default router;
