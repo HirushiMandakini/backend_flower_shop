@@ -46,6 +46,7 @@ export async function EmployeeUpdate(id: string,updateData: {
         throw error;
     }
 }
+// delete employee
 export async function EmployeeDelete(id: string) {
     try {
         const deleteEmployee = await prisma.employee.delete({
