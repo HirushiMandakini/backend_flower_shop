@@ -22,3 +22,10 @@ model employee{
   position  String
   salary    Decimal
 }
+model customer{
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String
+  phone     String? @unique
+  address   String
+}
