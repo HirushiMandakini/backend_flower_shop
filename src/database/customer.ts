@@ -56,3 +56,13 @@ export async function CustomerDelete(id: string){
         }
     }
 }
+
+export async function CustomerGetAll(){
+    try{
+        return await prisma.customer.findMany();
+    }
+    catch(error){
+        console.error("Error getting all customers:",error);
+        throw error;
+    }
+}

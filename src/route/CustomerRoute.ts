@@ -1,6 +1,6 @@
 import express from 'express';
 import Customer from '../model/customerModel';
-import { CustomerAdd,CustomerUpdate,CustomerDelete} from '../database/customer'
+import { CustomerAdd,CustomerUpdate,CustomerDelete,CustomerGetAll } from '../database/customer'
 import { Prisma } from '../../node_modules/.prisma/client/index';
 
 const router = express.Router();
@@ -27,16 +27,6 @@ router.put('/update/:id',async (req,res)=>{
     }
 });
 
-// router.delete('delete/:id',async (req,res)=>{
-//     const id = req.params;
-//     try{
-//         const customerDelete=await CustomerDelete(id);
-//         res.send("Customer Deleted Successfullly");
-//     }
-//     catch(error){
-//         res.send("Error Occured");
-//     }
-// })
 router.delete('/delete/:id', async (req, res) => {
     const id = req.params.id;  // Access the id directly from req.params
     try {
@@ -47,4 +37,13 @@ router.delete('/delete/:id', async (req, res) => {
     }
 });
 
+router.get('/all', async (req, res) => {
+    try{
+        const customerAll = await CustomerGetAll();
+        res.send(customerAll);
+    }
+    catch(error){
+        console.log(error)
+    }
+})
 export default router;
