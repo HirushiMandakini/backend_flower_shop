@@ -37,3 +37,22 @@ export async function CustomerUpdate(id: string,updateData: {
         throw error;
     }
 }
+
+export async function CustomerDelete(id: string){
+    try{
+        const deleteCustomer = await prisma.customer.delete({
+            where: {id:id},
+        });
+        console.log("Customer deleted successfully:",deleteCustomer);
+        return deleteCustomer;
+    }
+    catch(error: any){
+        if(error.code === "P2025"){
+        console.error("Error deleting customer:",error);
+        throw new error("Customer not found");
+        }else{
+            console.error("Error deleting customer:",error);
+            throw error;
+        }
+    }
+}
