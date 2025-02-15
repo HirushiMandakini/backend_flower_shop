@@ -19,3 +19,21 @@ export async function CustomerAdd(customer: { firstName: string; lastName: strin
         throw error;
     }
 }
+export async function CustomerUpdate(id: string,updateData: {
+    firstName?: string;
+    lastName?: string;
+    phone?: string;
+    address?: string;
+}){
+    try{
+        const updatedCustomer = await prisma.customer.update({
+            where: {id:id},
+            data: updateData
+        });
+        console.log("Customer updated successfully:",updatedCustomer);
+        return updatedCustomer;
+    }catch(error){
+        console.error("Error updating customer:",error);
+        throw error;
+    }
+}
