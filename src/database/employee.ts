@@ -76,22 +76,22 @@ export async function GetAllEmployee(){
     }
 }
 
-/get by id/
+// /get by id/
 export async function GetById(id: string) {
     try {
-        const child = await prisma.employee.findUnique({
+        const employee = await prisma.employee.findUnique({
             where: {
                 id: id,
             },
         });
 
-        if (!child) {
-            console.log("Child ID not found");
+        if (!employee) {
+            console.log("Employee ID not found");
             return null; // Return null instead of logging
         }
 
-        console.log("Child found:", child);
-        return child; // Return the child data
+        console.log("employee found:", employee);
+        return employee; // Return the employee data
     } catch (err) {
         console.log("Error fetching data:", err);
         throw err; // Throw the error to be caught by the route handler

@@ -66,3 +66,23 @@ export async function CustomerGetAll(){
         throw error;
     }
 }
+
+export async function CustomerGetById(id: string){
+    try{
+        const customer = await prisma.customer.findUnique({
+            where: {
+                id:id
+            },
+        });
+        if(!customer){
+            console.error("Customer not found");
+            return null;
+        }
+        console.log("Employee found:",customer);
+        return customer;
+    }
+    catch(error){
+        console.error("Error getting customer by id:",error);
+        throw error;
+    }
+}

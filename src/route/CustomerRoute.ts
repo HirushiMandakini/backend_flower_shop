@@ -1,6 +1,6 @@
 import express from 'express';
 import Customer from '../model/customerModel';
-import { CustomerAdd,CustomerUpdate,CustomerDelete,CustomerGetAll } from '../database/customer'
+import { CustomerAdd,CustomerUpdate,CustomerDelete,CustomerGetAll,CustomerGetById } from '../database/customer'
 import { Prisma } from '../../node_modules/.prisma/client/index';
 
 const router = express.Router();
@@ -46,4 +46,21 @@ router.get('/all', async (req, res) => {
         console.log(error)
     }
 })
+
+router.get('/search/:id', async (req, res) => {
+    const id = req.params.id;
+    try{
+        const customerSearch = await CustomerGetById(id);
+        res.status(200).json(customerSearch)
+        if(!customerSearch){
+            res.send("Customer Not Found");
+        }
+        res.status(200).json(customerSearch)
+    }
+    catch(error){
+        console.error("Error fetching customer:")
+    }
+});
+
+
 export default router;
