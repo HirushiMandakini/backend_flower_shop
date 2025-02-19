@@ -1,15 +1,19 @@
-export default class Customer{
-    id:string;
-    firstName:string;
-    lastName:string;
-    phone:string;
-    address:string;
+// import Order from "./Order"; // Ensure Order is correctly imported
 
-    constructor(id: string, firstName: string, lastName: string, phone: string, address: string){
+export default class Customer {
+    id: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    address: string;
+    // orders: Order[];
+
+    constructor(id: string, firstName: string, lastName: string, phone: string, address: string) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.address = address;
+    // this.orders = orders; // Initialize orders with an empty array if not provided
     }
 }

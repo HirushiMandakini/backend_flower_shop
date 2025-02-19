@@ -3,7 +3,6 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,19 +12,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model employee{
-  id        String  @id @default(uuid())  // We will replace UUID with a custom ID
-  firstName String
-  lastName  String
-  email     String  @unique
-  phone     String?
-  position  String
-  salary    Decimal
-}
-model customer{
+model Employee {
   id        String  @id @default(uuid())
   firstName String
   lastName  String
-  phone     String? @unique
+  email     String  @unique
+  phone     String
+  position  String
+  salary    Decimal
+}
+
+model Customer {
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String
+  phone     String
   address   String
+  orders    Order[]
+}
+
+model Order {
+  id             String        @id @default(uuid())
+  customer       Customer      @relation(fields: [customerId], references: [id])
+  customerId     String
+  totalAmount    Decimal
+  date           DateTime      @default(now())
+  orderItems     OrderItem[]
+}
+
+model FlowerBouquet {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal
+  stock       Int
+  supplier    Supplier?   @relation(fields: [supplierId], references: [id])
+  supplierId  String?
+  orderItems  OrderItem[]
+}
+
+model Supplier {
+  id          String      @id @default(uuid())
+  name        String
+  email       String      @unique
+  phone       String
+  address     String
+  flowerBouquets FlowerBouquet[]
+}
+
+model OrderItem {
+  id             String         @id @default(uuid())
+  order          Order          @relation(fields: [orderId], references: [id])
+  orderId        String
+  flowerBouquet  FlowerBouquet  @relation(fields: [flowerBouquetId], references: [id])
+  flowerBouquetId String
+  quantity       Int
+  price         Decimal
 }
