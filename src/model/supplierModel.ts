@@ -19,6 +19,6 @@ export default class Supplier {
         this.email = email;
         this.phone = phone;
         this.address = address;
-        // this.flowerBouquets = flowerBouquets;
+    // this.flowerBouquets = flowerBouquets;
     }
 }
