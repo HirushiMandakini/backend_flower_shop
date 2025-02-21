@@ -1,6 +1,6 @@
 import express from 'express';
 import Order from "../model/orderModel";
-import { saveOrder } from "../database/order";
+import { saveOrder, updateOrder } from "../database/order";
 import { PrismaClient } from "../../node_modules/.prisma/client/index";
 
 const router = express.Router();
@@ -16,4 +16,21 @@ router.post('/add',async (req, res) => {
         res.send("Error in adding order");
     }
 })
+
+router.put('/update/:id',async (req,res)=>{
+    const id = req.params.id;
+    const Order:Order=req.body;
+    try{
+        const customerUpdate=await updateOrder(id,Order);
+        res.send("Flower Bouquet Updated Successfullly");
+    }
+    catch(error){
+        res.send("Error Occured");
+    }
+});
+
+// delete order 
+
+
+
 export default router;

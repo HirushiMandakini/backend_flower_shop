@@ -33,7 +33,7 @@ export async function FlowerbouquetUpdate(id: string, updateData: {
     description?: string,
     price?: Decimal,
     stock?: number,
-    // supplierId?: string,
+    supplierId?: string,
 }){
     try{
         const updatedFlowerBouquet = await prisma.flowerBouquet.update({
