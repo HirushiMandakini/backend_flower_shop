@@ -4,6 +4,7 @@ import CustomerRote from './route/CustomerRoute';
 import SupplierRoute from './route/SupplierRoute';
 import FlowerBouquetRoute from './route/FlowerBouquetRoute'; 
 import OrderRoute from './route/OrderRoute';
+import OrderDetailRoute from './route/orderdetailRoute';
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use('/customer',CustomerRote);
 app.use('/supplier', SupplierRoute);
 app.use('/flowerBouquet', FlowerBouquetRoute); 
 app.use('/order', OrderRoute);
+app.use('/orderDetails', OrderDetailRoute); // Order
 
 const port = 4000
 app.listen(port, () => {
