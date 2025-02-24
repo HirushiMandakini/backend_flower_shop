@@ -24,6 +24,7 @@ const prisma = new PrismaClient();
 //     }
    
 // }
+
 export async function saveOrderDetail(orderDetail: { 
     orderId: string, 
     flowerBouquetId: string, 
@@ -76,6 +77,7 @@ export async function saveOrderDetail(orderDetail: {
         throw error;
     }
 }
+
  // update orderDetail
     export async function updateOrderDetail(id: string, updated: {
      orderId: string,
