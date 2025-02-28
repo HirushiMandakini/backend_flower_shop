@@ -1,4 +1,4 @@
-// import Order from "./Order"; // Ensure Order is correctly imported
+import Order from "../model/orderModel"; // Ensure Order is correctly imported
 
 export default class Customer {
     id: string;
@@ -6,7 +6,7 @@ export default class Customer {
     lastName: string;
     phone: string;
     address: string;
-    // orders: Order[];
+    orders: Order[];
 
     constructor(id: string, firstName: string, lastName: string, phone: string, address: string) {
         this.id = id;
@@ -14,6 +14,6 @@ export default class Customer {
         this.lastName = lastName;
         this.phone = phone;
         this.address = address;
-    // this.orders = orders; // Initialize orders with an empty array if not provided
+        this.orders = []; // Initialize orders with an empty array if not provided
     }
 }
